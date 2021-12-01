@@ -73,4 +73,15 @@ public class GlassesController : ControllerBase
     return NoContent();    }
 
     // DELETE action
+        [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+    var glasses = GlassesService.Get(id);
+
+    if (glasses is null)
+        return NotFound();
+
+    GlassesService.Delete(id);
+
+    return NoContent();    }
 }
