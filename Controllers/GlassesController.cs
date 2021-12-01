@@ -5,9 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace seeSharp.Controllers;
 
 [ApiController]
+//controller is the route name
 [Route("[controller]")]
 public class GlassesController : ControllerBase
 {
+    //Dane's solve
+    //private List<Glasses> Glasses = new List<Glasses>();
+
+
     public GlassesController()
     {
     }
@@ -16,6 +21,12 @@ public class GlassesController : ControllerBase
     [HttpGet]
     public ActionResult<List<Glasses>> GetAll() =>
         GlassesService.GetAll();
+
+    //Dane's solve
+    //[HttpGet]
+    //public ActionResult<List<Glasses>> Get() {
+    // return Glasses;    
+    //}
 
     // GET by Id action
     [HttpGet("{id}")]
@@ -30,6 +41,12 @@ public class GlassesController : ControllerBase
     }
 
     // POST action
+       [HttpPost]
+    public IActionResult Create(Glasses glasses)
+    {            
+        GlassesService.Add(glasses);
+        return CreatedAtAction(nameof(Create), new { id = glasses.Id }, glasses);    
+    }
 
     // PUT action
 
