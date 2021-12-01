@@ -48,7 +48,29 @@ public class GlassesController : ControllerBase
         return CreatedAtAction(nameof(Create), new { id = glasses.Id }, glasses);    
     }
 
+    //Dane's solve
+    //[HttpPost]
+    //public IActionResult Post(Glasses newGlasses) {
+    //GlassesList.Add(newGlasses);
+
+    //return CreateAtAction(nameof(Post), new {Id = newGlasses.Id}, newGlasses);
+    //}
+    
+
     // PUT action
+        [HttpPut("{id}")]
+    public IActionResult Update(int id, Glasses glasses)
+    {
+    if (id != glasses.Id)
+        return BadRequest();
+
+    var existingGlasses = GlassesService.Get(id);
+    if(existingGlasses is null)
+        return NotFound();
+
+    GlassesService.Update(glasses);           
+
+    return NoContent();    }
 
     // DELETE action
 }
