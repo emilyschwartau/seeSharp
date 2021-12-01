@@ -18,6 +18,16 @@ public class GlassesController : ControllerBase
         GlassesService.GetAll();
 
     // GET by Id action
+    [HttpGet("{id}")]
+    public ActionResult<Glasses> Get(int id)
+    {
+    var glasses = GlassesService.Get(id);
+
+    if(glasses == null)
+        return NotFound();
+
+    return glasses;
+    }
 
     // POST action
 
